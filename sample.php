@@ -21,10 +21,12 @@ $payvment = new Payvment();
 
 session_start();
 
-// 1. get payvmentUserToken/payvmentUserToken (third-party dependent)
+// 1. get payvmentId/payvmentUserToken (third-party dependent)
 $result = db_query("SELECT * FROM {payvment_integration} WHERE uid = %d LIMIT 1", $user->uid);
 while ($column = db_fetch_array($result)) {
     if (isset($column['payvment_id']) && isset($column['payvment_id'])) {
+	// IMPORTANT: if we're successful in retrieving the stored values
+	// we need to set the values in our $payvment object
         $payvment->setPayvmentId(intval($column['payvment_id']));
         $payvment->setPayvmentToken($column['token']);
     }
