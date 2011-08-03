@@ -113,14 +113,22 @@ class PayvmentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->redirectUrl);
     }
     
-    public function testGetOrdersUrl()
+    public function testGetOrdersUrlWith()
     {
         //$this->oauth = new Payvment($this->request);
         $this->oauth->setPayvmentToken('abc123');
-        $expected = 'https://api.payvment.com/rest/orders/?access_token=' . $this->oauth->getPayvmentToken() . "&command=pullOrders";
-        $actual = $this->oauth->getOrdersUrl();
+        $expectedUrl = 'https://api.payvment.com/rest/orders/?access_token=' . $this->oauth->getPayvmentToken();
         
-        $this->assertEquals($expected, $actual);
+        // test with no params sent
+        $actual = $this->oauth->getOrdersUrl();
+        $this->assertEquals($expectedUrl, $actual);
+        
+        
+        // test with command param
+        $params = array('command' => 'pullOrders');
+        $expectedUrl .= "&command=pullOrders";
+        $actual = $this->oauth->getOrdersUrl($params);
+        $this->assertEquals($expectedUrl, $actual);
     }
     
     public function testMagicFunctions()
@@ -180,7 +188,7 @@ class PayvmentTest extends PHPUnit_Framework_TestCase
         $this->mockPayvment->expects($this->any())
                 ->method("getOrdersUrl")
                 ->will($this->returnValue('bad.xml'));
-        $actual = $this->mockPayvment->orders('pullOrders', 'fooFormat');
+        $actual = $this->mockPayvment->orders(false, 'fooFormat');
         $this->assertEquals($actual,'Invalid format passed.');
         
     }

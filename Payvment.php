@@ -147,11 +147,17 @@ class Payvment extends BasePayvment {
      * @return string $url
      * 
      */
-    public function getOrdersUrl($command="pullOrders")
+    public function getOrdersUrl($params="")
     {
         $url = $this->_callbackUrl . "/rest/orders/?access_token=" . 
-                $this->_payvmentToken . "&command=" . $command;
-        
+                $this->_payvmentToken;
+                
+        if (!empty($params)) {
+            foreach ($params as $key => $val) {
+                $url .= "&" . urlencode($key) . '=' . urlencode($val);
+            }
+        }
+
         return $url;
     }
     
@@ -162,15 +168,19 @@ class Payvment extends BasePayvment {
      * @param string $format
      * @return string $result
      */
-    public function orders($command='pullOrders', $format='xml')
+    public function orders($params=false, $format='xml')
     {
         $result = false;
+        
+        // default command is pullOrders (pull all orders from Payvment)
+        if (!$params) {
+            $params = array('command' => 'pullOrders');
+        }
 
         switch ($format) {
             case 'xml':
-                $result = $this->getXml($this->getOrdersUrl($command));
+                $result = $this->getXml($this->getOrdersUrl($params));
                 break;
-
             default:
                 $result = 'Invalid format passed.';
                 break;
