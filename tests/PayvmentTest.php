@@ -1,7 +1,4 @@
 <?php
-require_once 'Payvment.php';
-require_once 'PHPUnit/Framework/TestCase.php';
-
 /**
  * Payvment tests
  */
