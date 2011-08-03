@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<response version='RC-1'>
+    <status>
+        <statusCode>200</statusCode>
+        <statusMessage>OK</statusMessage>
+    </status>
+    <token>abc123</token>
+    <payvment_userid>561011</payvment_userid>
+</response>
