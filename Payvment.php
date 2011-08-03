@@ -12,12 +12,12 @@
 
 require_once('BasePayvment.php');
 
-define('PRODUCTION_APPLICATION_ID', '727274');
-define('PRODUCTION_APPLICATION_SECRET', '4a4fd11f869b2314075dc0e9705a76cd');
+define('PRODUCTION_APPLICATION_ID', '<YOUR_APP_ID>');
+define('PRODUCTION_APPLICATION_SECRET', '<YOUR_APP_SECRET>');
 define('PRODUCTION_API_CALLBACK', 'https://api.payvment.com');
 
-define('SANDBOX_APPLICATION_ID', '727274');
-define('SANDBOX_APPLICATION_SECRET', '4a4fd11f869b2314075dc0e9705a76cd');
+define('SANDBOX_APPLICATION_ID', '<YOUR_SANDBOX_APP_ID>');
+define('SANDBOX_APPLICATION_SECRET', '<YOUR_SANDBOX_APP_SECRET>');
 define('SANDBOX_API_CALLBACK', 'https://api-sandbox.payvment.com');
 
 class Payvment extends BasePayvment {
